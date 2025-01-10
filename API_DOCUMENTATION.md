@@ -1,0 +1,66 @@
+## Query Parameters
+
+### Required Parameters
+
+| Parameter | Description | Example |
+|-----------|-------------|---------|
+| rows | Number of records to generate (1-1000) | `rows=10` |
+
+### Data Types
+
+#### Personal Information
+| Type | Description | Example | Output |
+|------|-------------|---------|---------|
+| {firstName} | Random first name | `name={firstName}` | `"John"` |
+| {lastName} | Random last name | `lname={lastName}` | `"Smith"` |
+| {email} | Random email address | `email={email}` | `"john.doe@example.com"` |
+| {username} | Random username | `username={username}` | `"johnsmith123"` |
+| {password} | Random password | `password={password}` | `"aX9#mK2$p"` |
+
+#### Contact Information
+| Type | Description | Example | Output |
+|------|-------------|---------|---------|
+| {phone} | 10-digit phone number | `phone={phone}` | `"5551234567"` |
+| {phone\|format} | Formatted phone number | `phone={phone\|format}` | `"(555) 123-4567"` |
+
+#### Location
+| Type | Description | Example | Output |
+|------|-------------|---------|---------|
+| {streetAddress} | Street address | `address={streetAddress}` | `"123 Main St"` |
+| {city} | City name | `city={city}` | `"Chicago"` |
+| {zip} | ZIP code | `zip={zip}` | `"60601"` |
+| {usState} | Full state name | `state={usState}` | `"Illinois"` |
+| {usState\|abbr} | State abbreviation | `state={usState\|abbr}` | `"IL"` |
+| {country} | Country name | `country={country}` | `"United States"` |
+| {country\|abbr2} | 2-letter country code | `country={country\|abbr2}` | `"US"` |
+| {addressObject} | Complete address object | `address={addressObject}` | `{"streetAddress": "123 Main St", "city": "Chicago", "state": "IL", "zip": "60601"}` |
+
+#### Business
+| Type | Description | Example | Output |
+|------|-------------|---------|---------|
+| {business} | Company name | `company={business}` | `"Acme Corporation"` |
+
+#### Payment Information
+| Type | Description | Example | Output |
+|------|-------------|---------|---------|
+| {ccType} | Credit card provider | `cardType={ccType}` | `"Visa"` |
+| {ccType\|abbr} | Credit card provider abbreviation | `cardType={ccType\|abbr}` | `"VISA"` |
+| {ccNumber} | Credit card number | `cardNumber={ccNumber}` | `"4532123456789012"` |
+
+#### Numbers and IDs
+| Type | Description | Example | Output |
+|------|-------------|---------|---------|
+| {index} | Sequential number (1-based) | `id={index}` | `1` |
+| {numberRange\|min,max} | Random number in range | `amount={numberRange\|1,100}` | `42` |
+| {numberLength\|n} | Random number with n digits | `code={numberLength\|6}` | `"123456"` |
+
+#### Dates and Strings
+| Type | Description | Example | Output |
+|------|-------------|---------|---------|
+| {date} | Random date | `date={date}` | `"2024-02-15T10:30:00.000Z"` |
+| {string\|n} | Random string of length n | `str={string\|10}` | `"aB3$kP9#mN"` |
+
+### Special Features
+
+#### Array Selection
+Use square brackets to randomly select from a list of options: 

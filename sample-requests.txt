@@ -1,0 +1,44 @@
+# Basic user data (20 records)
+http://localhost:3000/api?rows=20&fname={firstName}&lname={lastName}&email={email}
+
+# Full user profile (10 records)
+http://localhost:3000/api?rows=10&id={index}&firstName={firstName}&lastName={lastName}&email={email}&username={username}&password={password}
+
+# Address data (5 records)
+http://localhost:3000/api?rows=5&address={streetAddress}&city={city}&zip={zip}
+
+# Contact information (3 records)
+http://localhost:3000/api?rows=3&name={firstName}&phone={phone}&email={email}
+
+# Single record with static value
+http://localhost:3000/api?rows=1&name={firstName}&role=admin&active=true
+
+# Multiple records with index
+http://localhost:3000/api?rows=5&id={index}&name={firstName}
+
+# Business contact details (5 records)
+http://localhost:3000/api?rows=5&company={business}&phone={phone|format}&address={streetAddress}&zip={zip}
+
+# Credit card information (3 records)
+http://localhost:3000/api?rows=3&cardType={ccType}&cardNumber={ccNumber}&name={firstName}~{lastName}
+
+# International addresses (4 records)
+http://localhost:3000/api?rows=4&name={firstName}&country={country}&countryCode={country|abbr2}
+
+# Full customer profile (2 records)
+http://localhost:3000/api?rows=2&id={index}&name={firstName}~{lastName}&email={email}&phone={phone|format}&address={addressObject}&ccType={ccType}&ccNumber={ccNumber}
+
+# Random dates and numbers (5 records)
+http://localhost:3000/api?rows=5&id={numberRange|1,100}&date={date}&randomString={string|10}
+
+# User authentication data (3 records)
+http://localhost:3000/api?rows=3&username={username}&password={string|12}&email={email}&lastLogin={date}
+
+# Business directory (4 records)
+http://localhost:3000/api?rows=4&business={business}&contact={firstName}~{lastName}&phone={phone|format}&address={streetAddress}&city={city}&state={usState|abbr}&zip={zip}
+
+# E-commerce order data (5 records)
+http://localhost:3000/api?rows=5&orderId={numberLength|6}&customerName={firstName}~{lastName}&amount={numberRange|10,1000}&cardType={ccType}&cardNumber={ccNumber}&date={date}
+
+# Employee records (3 records)
+http://localhost:3000/api?rows=3&employeeId={index}&name={firstName}~{lastName}&department=[HR,IT,Sales,Marketing]&email={email}&extension={numberLength|4}

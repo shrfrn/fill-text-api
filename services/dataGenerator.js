@@ -234,6 +234,19 @@ const generateValue = (value, index, previousValues) => {
                 zip: faker.location.zipCode()
             }
 
+        // Text generation
+        case 'lorem':
+            if (format && format.includes(',')) {
+                // Handle word range (min,max)
+                const [min, max] = format.split(',').map(Number)
+                const wordCount = faker.number.int({ min, max })
+                return faker.lorem.words(wordCount)
+            } else {
+                // Handle fixed word count
+                const wordCount = parseInt(format) || 7
+                return faker.lorem.words(wordCount)
+            }
+
         default:
             return value
     }

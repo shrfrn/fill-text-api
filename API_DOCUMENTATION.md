@@ -102,6 +102,13 @@ Common format examples:
 - `date={date\|DOW, Month d, yyyy}` → "Tuesday, March 9, 2024"
 - `date={date\|yyyy-MM-dd HH:mm:ss}` → "2024-03-09 14:05:09"
 
+#### Text Generation
+| Type | Description | Example | Output |
+|------|-------------|---------|---------|
+| {lorem} | Generate 3 random words | `text={lorem}` | `"lorem ipsum dolor"` |
+| {lorem\|n} | Generate n random words | `text={lorem\|5}` | `"lorem ipsum dolor sit amet"` |
+| {lorem\|min,max} | Generate random number of words | `text={lorem\|3,6}` | `"lorem ipsum dolor sit"` |
+
 ### Special Features
 
 #### Array Selection

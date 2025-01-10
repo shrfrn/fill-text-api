@@ -39,7 +39,12 @@ app.get('/api', (req, res) => {
         const data = generateData(params)
         res.json(data)
     } catch (error) {
-        res.status(500).json({ error: 'Failed to generate data' })
+        console.error('Data generation error:', error.message, error.stack)
+        res.status(500).json({ 
+            error: 'Failed to generate data',
+            message: error.message,
+            details: error.stack
+        })
     }
 })
 

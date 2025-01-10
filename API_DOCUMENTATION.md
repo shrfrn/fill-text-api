@@ -74,8 +74,12 @@
 | yyyy | Four-digit year | "2024" |
 | MM | Two-digit month (01-12) | "03" |
 | M | Single-digit month (1-12) | "3" |
+| Month | Full month name | "March" |
+| Mon | Month abbreviation | "Mar" |
 | dd | Two-digit day (01-31) | "09" |
 | d | Single-digit day (1-31) | "9" |
+| DOW | Full day of week | "Tuesday" |
+| dow | Day of week abbreviation | "Tue" |
 | HH | Two-digit hour (00-23) | "14" |
 | H | Single-digit hour (0-23) | "14" |
 | mm | Two-digit minutes (00-59) | "05" |
@@ -85,8 +89,8 @@
 
 Common format examples:
 - `date={date\|M/d/yyyy}` → "3/9/2024"
-- `date={date\|MM/dd/yyyy}` → "03/09/2024"
-- `date={date\|d.M.yyyy H:m}` → "9.3.2024 14:5"
+- `date={date\|dow, Mon d, yyyy}` → "Tue, Mar 9, 2024"
+- `date={date\|DOW, Month d, yyyy}` → "Tuesday, March 9, 2024"
 - `date={date\|yyyy-MM-dd HH:mm:ss}` → "2024-03-09 14:05:09"
 
 ### Special Features

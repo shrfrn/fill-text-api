@@ -2,7 +2,7 @@
 
 ### General Parameters
 
-| Parameter | Description | Default | Example |
+| Parameter |  optionsDescription | Default | Example |
 |-----------|-------------|---------|---------|
 | rows | Number of records to generate (1-1000) | 10 | `rows=10` |
 
@@ -12,7 +12,16 @@
 | Type | Description | Example | Output |
 |------|-------------|---------|---------|
 | {firstName} | Random first name | `name={firstName}` | `"John"` |
+| {middleName} | Random middle name | `middle={middleName}` | `"Robert"` |
+| {middleName\|initial} | Middle initial | `middle={middleName\|initial}` | `"R."` |
 | {lastName} | Random last name | `lname={lastName}` | `"Smith"` |
+| {title} | Full title | `title={title}` | `"Professor"` |
+| {title\|abbr} | Abbreviated title | `title={title\|abbr}` | `"Prof."` |
+| {fullName} | Full name | `name={fullName}` | `"John Smith"` |
+| {fullName\|title} | Full name with title | `name={fullName\|title}` | `"Mr. John Smith"` |
+| {fullName\|middle} | Name with middle name | `name={fullName\|middle}` | `"John Robert Smith"` |
+| {fullName\|title,middle} | Complete name | `name={fullName\|title,middle}` | `"Dr. John Robert Smith"` |
+| {fullName\|title,middle,initial} | With middle initial | `name={fullName\|title,middle,initial}` | `"Dr. John R. Smith"` |
 | {email} | Random email address | `email={email}` | `"john.doe@example.com"` |
 | {username} | Random username | `username={username}` | `"johnsmith123"` |
 | {password} | Random password | `password={password}` | `"aX9#mK2$p"` |

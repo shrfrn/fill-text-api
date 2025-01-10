@@ -66,6 +66,24 @@ const generateValue = (value, index, previousValues) => {
             return faker.person.firstName()
         case 'lastName':
             return faker.person.lastName()
+        case 'middleName':
+            return format === 'initial' 
+                ? faker.person.firstName().charAt(0) + '.'
+                : faker.person.firstName()
+        case 'title':
+            return format === 'abbr'
+                ? faker.helpers.arrayElement(['Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Prof.'])
+                : faker.helpers.arrayElement(['Mister', 'Misses', 'Miss', 'Doctor', 'Professor'])
+        case 'fullName':
+            const title = format?.includes('title') 
+                ? faker.helpers.arrayElement(['Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Prof.']) + ' '
+                : ''
+            const middle = format?.includes('middle') 
+                ? format.includes('initial')
+                    ? ` ${faker.person.firstName().charAt(0)}. `
+                    : ` ${faker.person.firstName()} `
+                : ' '
+            return `${title}${faker.person.firstName()}${middle}${faker.person.lastName()}`
         case 'username':
             return faker.internet.userName()
         case 'password':

@@ -81,17 +81,26 @@
 | Pattern | Description | Example Output |
 |---------|-------------|----------------|
 | yyyy | Four-digit year | "2024" |
-| MM | Two-digit month | "03" |
-| dd | Two-digit day | "21" |
-| HH | Two-digit hour (24-hour) | "14" |
-| mm | Two-digit minutes | "30" |
-| ss | Two-digit seconds | "45" |
+| MM | Two-digit month (01-12) | "03" |
+| M | Single-digit month (1-12) | "3" |
+| Month | Full month name | "March" |
+| Mon | Month abbreviation | "Mar" |
+| dd | Two-digit day (01-31) | "09" |
+| d | Single-digit day (1-31) | "9" |
+| DOW | Full day of week | "Tuesday" |
+| dow | Day of week abbreviation | "Tue" |
+| HH | Two-digit hour (00-23) | "14" |
+| H | Single-digit hour (0-23) | "14" |
+| mm | Two-digit minutes (00-59) | "05" |
+| m | Single-digit minutes (0-59) | "5" |
+| ss | Two-digit seconds (00-59) | "09" |
+| s | Single-digit seconds (0-59) | "9" |
 
 Common format examples:
-- `date={date\|MM/dd/yyyy}` → "03/21/2024"
-- `date={date\|yyyy-MM-dd}` → "2024-03-21"
-- `date={date\|dd.MM.yyyy HH:mm}` → "21.03.2024 14:30"
-- `date={date\|yyyy-MM-dd HH:mm:ss}` → "2024-03-21 14:30:45"
+- `date={date\|M/d/yyyy}` → "3/9/2024"
+- `date={date\|dow, Mon d, yyyy}` → "Tue, Mar 9, 2024"
+- `date={date\|DOW, Month d, yyyy}` → "Tuesday, March 9, 2024"
+- `date={date\|yyyy-MM-dd HH:mm:ss}` → "2024-03-09 14:05:09"
 
 ### Special Features
 

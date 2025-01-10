@@ -145,49 +145,83 @@ const generateValue = (value, index, previousValues) => {
         // Dates and strings
         case 'date':
             let date
-            if (format && format.includes(',')) {
-                // Handle date range
-                const [minMax, ...formatParts] = format.split('|')
-                const [min, max] = minMax.split(',')
+            const formatDate = (date, format) => {
+                if (!format) return date.toISOString()
                 
-                const parseDate = (dateStr) => {
-                    if (!dateStr) return undefined
-                    const [dd, mm, yyyy] = dateStr.split('-').map(Number)
-                    return new Date(yyyy, mm - 1, dd)
-                }
-
-                const minDate = parseDate(min)
-                const maxDate = parseDate(max)
-                
-                date = faker.date.between({ 
-                    from: minDate || new Date('1950-01-01'),
-                    to: maxDate || new Date()
-                })
-
-                // Apply formatting if specified
-                const dateFormat = formatParts.join('|')
-                if (dateFormat) {
-                    return dateFormat
-                        .replace('yyyy', date.getFullYear())
-                        .replace('MM', String(date.getMonth() + 1).padStart(2, '0'))
-                        .replace('dd', String(date.getDate()).padStart(2, '0'))
-                        .replace('HH', String(date.getHours()).padStart(2, '0'))
-                        .replace('mm', String(date.getMinutes()).padStart(2, '0'))
-                        .replace('ss', String(date.getSeconds()).padStart(2, '0'))
-                }
-            } else {
-                date = faker.date.recent()
-                if (format) {
-                    return format
-                        .replace('yyyy', date.getFullYear())
-                        .replace('MM', String(date.getMonth() + 1).padStart(2, '0'))
-                        .replace('dd', String(date.getDate()).padStart(2, '0'))
-                        .replace('HH', String(date.getHours()).padStart(2, '0'))
-                        .replace('mm', String(date.getMinutes()).padStart(2, '0'))
-                        .replace('ss', String(date.getSeconds()).padStart(2, '0'))
+                try {
+                    const months = [
+                        'January', 'February', 'March', 'April', 'May', 'June',
+                        'July', 'August', 'September', 'October', 'November', 'December'
+                    ]
+                    const monthsAbbr = months.map(m => m.substring(0, 3))
+                    
+                    const days = [
+                        'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+                        'Thursday', 'Friday', 'Saturday'
+                    ]
+                    const daysAbbr = days.map(d => d.substring(0, 3))
+                    
+                    // Create a map of replacements with word boundaries
+                    const replacements = [
+                        ['\\bMonth\\b', months[date.getMonth()]],
+                        ['\\bMon\\b', monthsAbbr[date.getMonth()]],
+                        ['\\bDOW\\b', days[date.getDay()]],
+                        ['\\bdow\\b', daysAbbr[date.getDay()]],
+                        ['yyyy', date.getFullYear()],
+                        ['MM', String(date.getMonth() + 1).padStart(2, '0')],
+                        ['\\bM\\b', String(date.getMonth() + 1)],
+                        ['dd', String(date.getDate()).padStart(2, '0')],
+                        ['\\bd\\b', String(date.getDate())],
+                        ['HH', String(date.getHours()).padStart(2, '0')],
+                        ['\\bH\\b', String(date.getHours())],
+                        ['mm', String(date.getMinutes()).padStart(2, '0')],
+                        ['\\bm\\b', String(date.getMinutes())],
+                        ['ss', String(date.getSeconds()).padStart(2, '0')],
+                        ['\\bs\\b', String(date.getSeconds())]
+                    ]
+                    
+                    // Apply replacements in order
+                    let result = format
+                    for (const [pattern, replacement] of replacements) {
+                        result = result.replace(new RegExp(pattern, 'g'), replacement)
+                    }
+                    
+                    return result
+                } catch (err) {
+                    console.error('Date formatting error:', err)
+                    return date.toISOString()
                 }
             }
-            return date.toISOString()
+
+            try {
+                if (format && format.includes(',')) {
+                    // Handle date range
+                    const [rangeStr, ...formatParts] = format.split('|')
+                    const [min, max] = rangeStr.split(',')
+                    
+                    const parseDate = (dateStr) => {
+                        if (!dateStr) return undefined
+                        const [dd, mm, yyyy] = dateStr.split('-').map(Number)
+                        return new Date(yyyy, mm - 1, dd)
+                    }
+
+                    const minDate = parseDate(min)
+                    const maxDate = parseDate(max)
+                    
+                    date = faker.date.between({ 
+                        from: minDate || new Date('1950-01-01'),
+                        to: maxDate || new Date()
+                    })
+
+                    return formatDate(date, formatParts.join('|'))
+                } else {
+                    date = faker.date.recent()
+                    return formatDate(date, format)
+                }
+            } catch (err) {
+                console.error('Date generation error:', err)
+                return new Date().toISOString()
+            }
         case 'string':
             return faker.string.alphanumeric(parseInt(format) || 5)
 

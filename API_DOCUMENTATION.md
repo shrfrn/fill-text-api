@@ -57,8 +57,25 @@
 #### Dates and Strings
 | Type | Description | Example | Output |
 |------|-------------|---------|---------|
-| {date} | Random date | `date={date}` | `"2024-02-15T10:30:00.000Z"` |
+| {date} | ISO formatted date | `date={date}` | `"2024-02-15T10:30:00.000Z"` |
+| {date\|format} | Custom formatted date | `date={date\|MM/dd/yyyy}` | `"03/21/2024"` |
 | {string\|n} | Random string of length n | `str={string\|10}` | `"aB3$kP9#mN"` |
+
+##### Date Format Patterns
+| Pattern | Description | Example Output |
+|---------|-------------|----------------|
+| yyyy | Four-digit year | "2024" |
+| MM | Two-digit month | "03" |
+| dd | Two-digit day | "21" |
+| HH | Two-digit hour (24-hour) | "14" |
+| mm | Two-digit minutes | "30" |
+| ss | Two-digit seconds | "45" |
+
+Common format examples:
+- `date={date\|MM/dd/yyyy}` → "03/21/2024"
+- `date={date\|yyyy-MM-dd}` → "2024-03-21"
+- `date={date\|dd.MM.yyyy HH:mm}` → "21.03.2024 14:30"
+- `date={date\|yyyy-MM-dd HH:mm:ss}` → "2024-03-21 14:30:45"
 
 ### Special Features
 

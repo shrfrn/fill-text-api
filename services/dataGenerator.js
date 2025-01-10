@@ -126,7 +126,17 @@ const generateValue = (value, index, previousValues) => {
 
         // Dates and strings
         case 'date':
-            return faker.date.recent().toISOString()
+            const date = faker.date.recent()
+            if (format) {
+                return format
+                    .replace('yyyy', date.getFullYear())
+                    .replace('MM', String(date.getMonth() + 1).padStart(2, '0'))
+                    .replace('dd', String(date.getDate()).padStart(2, '0'))
+                    .replace('HH', String(date.getHours()).padStart(2, '0'))
+                    .replace('mm', String(date.getMinutes()).padStart(2, '0'))
+                    .replace('ss', String(date.getSeconds()).padStart(2, '0'))
+            }
+            return date.toISOString()
         case 'string':
             return faker.string.alphanumeric(parseInt(format) || 5)
 

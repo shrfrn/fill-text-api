@@ -1,4 +1,4 @@
-## Query Parameters
+ ## Query Parameters
 
 ### General Parameters
 
@@ -68,7 +68,14 @@
 |------|-------------|---------|---------|
 | {date} | ISO formatted date | `date={date}` | `"2024-02-15T10:30:00.000Z"` |
 | {date\|format} | Custom formatted date | `date={date\|MM/dd/yyyy}` | `"03/21/2024"` |
+| {date\|min,max} | Date within range | `dob={date\|01-01-1980,31-12-1999}` | `"1992-06-15T..."` |
+| {date\|min,max\|format} | Formatted date in range | `dob={date\|01-01-1980,31-12-1999\|MM/dd/yyyy}` | `"06/15/1992"` |
 | {string\|n} | Random string of length n | `str={string\|10}` | `"aB3$kP9#mN"` |
+
+##### Date Range Format
+- Date range uses `dd-mm-yyyy` format for min and max dates
+- Either min or max can be omitted: `date={date|,31-12-1999}` or `date={date|01-01-1980,}`
+- Can be combined with date formatting: `date={date|01-01-1980,31-12-1999|yyyy-MM-dd}`
 
 ##### Date Format Patterns
 | Pattern | Description | Example Output |

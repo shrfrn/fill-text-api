@@ -126,15 +126,48 @@ const generateValue = (value, index, previousValues) => {
 
         // Dates and strings
         case 'date':
-            const date = faker.date.recent()
-            if (format) {
-                return format
-                    .replace('yyyy', date.getFullYear())
-                    .replace('MM', String(date.getMonth() + 1).padStart(2, '0'))
-                    .replace('dd', String(date.getDate()).padStart(2, '0'))
-                    .replace('HH', String(date.getHours()).padStart(2, '0'))
-                    .replace('mm', String(date.getMinutes()).padStart(2, '0'))
-                    .replace('ss', String(date.getSeconds()).padStart(2, '0'))
+            let date
+            if (format && format.includes(',')) {
+                // Handle date range
+                const [minMax, ...formatParts] = format.split('|')
+                const [min, max] = minMax.split(',')
+                
+                const parseDate = (dateStr) => {
+                    if (!dateStr) return undefined
+                    const [dd, mm, yyyy] = dateStr.split('-').map(Number)
+                    return new Date(yyyy, mm - 1, dd)
+                }
+
+                const minDate = parseDate(min)
+                const maxDate = parseDate(max)
+                
+                date = faker.date.between({ 
+                    from: minDate || new Date('1950-01-01'),
+                    to: maxDate || new Date()
+                })
+
+                // Apply formatting if specified
+                const dateFormat = formatParts.join('|')
+                if (dateFormat) {
+                    return dateFormat
+                        .replace('yyyy', date.getFullYear())
+                        .replace('MM', String(date.getMonth() + 1).padStart(2, '0'))
+                        .replace('dd', String(date.getDate()).padStart(2, '0'))
+                        .replace('HH', String(date.getHours()).padStart(2, '0'))
+                        .replace('mm', String(date.getMinutes()).padStart(2, '0'))
+                        .replace('ss', String(date.getSeconds()).padStart(2, '0'))
+                }
+            } else {
+                date = faker.date.recent()
+                if (format) {
+                    return format
+                        .replace('yyyy', date.getFullYear())
+                        .replace('MM', String(date.getMonth() + 1).padStart(2, '0'))
+                        .replace('dd', String(date.getDate()).padStart(2, '0'))
+                        .replace('HH', String(date.getHours()).padStart(2, '0'))
+                        .replace('mm', String(date.getMinutes()).padStart(2, '0'))
+                        .replace('ss', String(date.getSeconds()).padStart(2, '0'))
+                }
             }
             return date.toISOString()
         case 'string':

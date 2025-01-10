@@ -127,6 +127,22 @@ const generateValue = (value, index, previousValues) => {
         // Dates and strings
         case 'date':
             let date
+            const formatDate = (date, format) => {
+                if (!format) return date.toISOString()
+                return format
+                    .replace('yyyy', date.getFullYear())
+                    .replace('MM', String(date.getMonth() + 1).padStart(2, '0'))
+                    .replace('M', String(date.getMonth() + 1))
+                    .replace('dd', String(date.getDate()).padStart(2, '0'))
+                    .replace('d', String(date.getDate()))
+                    .replace('HH', String(date.getHours()).padStart(2, '0'))
+                    .replace('H', String(date.getHours()))
+                    .replace('mm', String(date.getMinutes()).padStart(2, '0'))
+                    .replace('m', String(date.getMinutes()))
+                    .replace('ss', String(date.getSeconds()).padStart(2, '0'))
+                    .replace('s', String(date.getSeconds()))
+            }
+
             if (format && format.includes(',')) {
                 // Handle date range
                 const [minMax, ...formatParts] = format.split('|')
@@ -146,30 +162,11 @@ const generateValue = (value, index, previousValues) => {
                     to: maxDate || new Date()
                 })
 
-                // Apply formatting if specified
-                const dateFormat = formatParts.join('|')
-                if (dateFormat) {
-                    return dateFormat
-                        .replace('yyyy', date.getFullYear())
-                        .replace('MM', String(date.getMonth() + 1).padStart(2, '0'))
-                        .replace('dd', String(date.getDate()).padStart(2, '0'))
-                        .replace('HH', String(date.getHours()).padStart(2, '0'))
-                        .replace('mm', String(date.getMinutes()).padStart(2, '0'))
-                        .replace('ss', String(date.getSeconds()).padStart(2, '0'))
-                }
+                return formatDate(date, formatParts.join('|'))
             } else {
                 date = faker.date.recent()
-                if (format) {
-                    return format
-                        .replace('yyyy', date.getFullYear())
-                        .replace('MM', String(date.getMonth() + 1).padStart(2, '0'))
-                        .replace('dd', String(date.getDate()).padStart(2, '0'))
-                        .replace('HH', String(date.getHours()).padStart(2, '0'))
-                        .replace('mm', String(date.getMinutes()).padStart(2, '0'))
-                        .replace('ss', String(date.getSeconds()).padStart(2, '0'))
-                }
+                return formatDate(date, format)
             }
-            return date.toISOString()
         case 'string':
             return faker.string.alphanumeric(parseInt(format) || 5)
 

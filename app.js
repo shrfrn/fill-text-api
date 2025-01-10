@@ -35,7 +35,8 @@ app.get('/', async (req, res) => {
 // API endpoint that supports query parameters for data generation
 app.get('/api', (req, res) => {
     try {
-        const data = generateData(req.query)
+        const params = { ...req.query, rows: req.query.rows || 10 }
+        const data = generateData(params)
         res.json(data)
     } catch (error) {
         res.status(500).json({ error: 'Failed to generate data' })

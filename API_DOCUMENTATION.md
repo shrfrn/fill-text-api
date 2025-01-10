@@ -1,10 +1,10 @@
 ## Query Parameters
 
-### Required Parameters
+### General Parameters
 
-| Parameter | Description | Example |
-|-----------|-------------|---------|
-| rows | Number of records to generate (1-1000) | `rows=10` |
+| Parameter | Description | Default | Example |
+|-----------|-------------|---------|---------|
+| rows | Number of records to generate (1-1000) | 10 | `rows=10` |
 
 ### Data Types
 

@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 
 const parseType = (value) => {
     // Handle format parameters like {phone|format} or {numberRange|1,100}
-    const matches = value.match(/\{(\w+)(?:\|([^}]+))?\}/)
+    const matches = value.match(/\{(\w+)(?:\|([^}]*))?\}/)
     if (!matches) return { type: value }
     
     return {

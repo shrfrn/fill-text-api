@@ -93,13 +93,41 @@ const generateValue = (value, index, previousValues) => {
 
         // Contact data
         case 'phone':
-            // Generate a consistent 10-digit number first
-            const digits = faker.string.numeric(10);
+            // Parse format options if present
+            const formatOptions = format ? format.split(',') : [];
             
-            // Then apply formatting if requested
-            return format === 'format'
-                ? `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`
-                : digits;
+            // Generate base digits
+            const digitCount = formatOptions.find(opt => !isNaN(opt));
+            const digits = faker.string.numeric(digitCount ? parseInt(digitCount) : 10);
+            
+            // Start building the phone number
+            let result = '';
+            
+            // Add country code if requested
+            if (formatOptions.includes('country')) {
+                const countryDigits = faker.string.numeric({ min: 1, max: 3 });
+                result += `+${countryDigits}`;
+                if (digits.length > 0) result += '-';
+            }
+            
+            // Add area code if requested
+            if (formatOptions.includes('area') || 
+                formatOptions.includes('area2') || 
+                formatOptions.includes('area3')) {
+                let areaLength = 3; // default
+                if (formatOptions.includes('area2')) areaLength = 2;
+                if (formatOptions.includes('area3')) areaLength = 3;
+                
+                result += `(${digits.slice(0, areaLength)})`;
+                if (digits.slice(areaLength).length > 0) result += '-';
+            }
+            
+            // Add remaining digits
+            const remainingStart = result.includes(')') ? 
+                (result.includes('area2') ? 2 : 3) : 0;
+            result += digits.slice(remainingStart);
+            
+            return result;
 
         // Location data
         case 'streetAddress':

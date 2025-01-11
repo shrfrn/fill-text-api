@@ -59,7 +59,8 @@
 #### Numbers and IDs
 | Type | Description | Example | Output |
 |------|-------------|---------|---------|
-| {index} | Sequential number (1-based) | `id={index}` | `1` |
+| {index} | Sequential number (0-based) | `id={index}` | `0` |
+| {index\|n} | Sequential number starting from n | `id={index\|1}` | `1` |
 | {numberRange\|min,max} | Random number in range | `amount={numberRange\|1,100}` | `42` |
 | {numberLength\|n} | Random number with n digits | `code={numberLength\|6}` | `"123456"` |
 

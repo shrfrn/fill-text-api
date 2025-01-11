@@ -6,7 +6,7 @@ export default {
     ['jest-html-reporters', {
       publicPath: './test-reports',
       filename: 'test-report.html',
-      openReport: true,
+      openReport: false,
       includeFailureMsg: true,
       includeConsoleLog: true
     }]

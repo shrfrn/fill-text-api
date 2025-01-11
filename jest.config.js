@@ -1,11 +1,16 @@
 export default {
+  verbose: true,
+  testEnvironment: 'node',
   reporters: [
     'default',
     ['jest-html-reporter', {
       pageTitle: 'Test Report',
+      outputPath: './test-reports/test-report.html',
       includeFailureMsg: true,
-      includeSuiteFailure: true,
-      styleOverridePath: './custom-style.css'  // Optional
+      includeConsoleLog: true
     }]
-  ]
-} 
+  ],
+  transform: {
+    '^.+\\.js$': 'babel-jest'
+  }
+}; 

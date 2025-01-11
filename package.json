@@ -5,9 +5,9 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "jest",
-    "test:report": "jest --reporters=default --reporters=jest-html-reporter",
-    "test:watch": "jest --watch --reporters=default --reporters=jest-html-reporter"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "keywords": [],
   "author": "",
@@ -18,30 +18,12 @@
     "marked": "^15.0.6"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.x.x",
-    "jest": "^29.x.x",
-    "axios": "^1.x.x",
-    "jest-html-reporter": "^3.10.2"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "reporters": [
-      "default",
-      [
-        "./node_modules/jest-html-reporter",
-        {
-          "pageTitle": "Data Generator API Test Report",
-          "outputPath": "test-report.html",
-          "includeFailureMsg": true,
-          "includeConsoleLog": true,
-          "dateFormat": "yyyy-MM-dd HH:mm:ss",
-          "sort": "status",
-          "executionTimeWarningThreshold": 5,
-          "styleOverridePath": "custom-style.css"
-        }
-      ]
-    ]
+    "@babel/core": "^7.x",
+    "@babel/preset-env": "^7.x",
+    "babel-jest": "^29.x",
+    "jest": "^29.x",
+    "jest-html-reporter": "^3.x",
+    "jest-watch-typeahead": "^2.x",
+    "supertest": "^6.x"
   }
 }

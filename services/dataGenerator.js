@@ -93,12 +93,13 @@ const generateValue = (value, index, previousValues) => {
 
         // Contact data
         case 'phone':
-            const phoneNumber = faker.phone.number('##########')
-                .split(/[xX]/)[0]
-                .trim()
+            // Generate a consistent 10-digit number first
+            const digits = faker.string.numeric(10);
+            
+            // Then apply formatting if requested
             return format === 'format'
-                ? phoneNumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
-                : phoneNumber
+                ? `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`
+                : digits;
 
         // Location data
         case 'streetAddress':

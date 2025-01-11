@@ -96,16 +96,35 @@ const generateValue = (value, index, previousValues) => {
             // Parse format options if present
             const formatOptions = format ? format.split(',') : [];
             
+            // Determine the total length needed based on format options
+            let totalDigits = 10; // default
+            
+            // Check for explicit digit count first as it overrides defaults
+            const explicitDigits = formatOptions.find(opt => !isNaN(opt));
+            if (explicitDigits) {
+                totalDigits = parseInt(explicitDigits);
+            } else {
+                // If no explicit digits specified, use format-based defaults
+                if (formatOptions.includes('area2')) {
+                    totalDigits = 10; // 2 for area + 8 for number
+                } else if (formatOptions.includes('area3')) {
+                    totalDigits = 10; // 3 for area + 7 for number
+                } else if (formatOptions.includes('area')) {
+                    // Random between 2 and 3 for area code, adjust total accordingly
+                    totalDigits = faker.number.int({ min: 0, max: 1 }) === 0 ? 10 : 10;
+                }
+            }
+            
             // Generate base digits
-            const digitCount = formatOptions.find(opt => !isNaN(opt));
-            const digits = faker.string.numeric(digitCount ? parseInt(digitCount) : 10);
+            const digits = faker.string.numeric(totalDigits);
             
             // Start building the phone number
             let result = '';
             
             // Add country code if requested
             if (formatOptions.includes('country')) {
-                const countryDigits = faker.string.numeric({ min: 1, max: 3 });
+                const countryLength = faker.number.int({ min: 1, max: 3 });
+                const countryDigits = faker.string.numeric(countryLength);
                 result += `+${countryDigits}`;
                 if (digits.length > 0) result += '-';
             }
@@ -115,17 +134,25 @@ const generateValue = (value, index, previousValues) => {
                 formatOptions.includes('area2') || 
                 formatOptions.includes('area3')) {
                 let areaLength = 3; // default
-                if (formatOptions.includes('area2')) areaLength = 2;
-                if (formatOptions.includes('area3')) areaLength = 3;
+                if (formatOptions.includes('area2')) {
+                    areaLength = 2;
+                } else if (formatOptions.includes('area3')) {
+                    areaLength = 3;
+                } else if (formatOptions.includes('area')) {
+                    // Randomly choose between 2 and 3 digits for generic area code
+                    areaLength = faker.number.int({ min: 2, max: 3 });
+                }
                 
                 result += `(${digits.slice(0, areaLength)})`;
                 if (digits.slice(areaLength).length > 0) result += '-';
+                
+                // Add remaining digits based on area code length
+                const remainingDigits = digits.slice(areaLength);
+                result += remainingDigits;
+            } else {
+                // No area code, just add all digits
+                result += digits;
             }
-            
-            // Add remaining digits
-            const remainingStart = result.includes(')') ? 
-                (result.includes('area2') ? 2 : 3) : 0;
-            result += digits.slice(remainingStart);
             
             return result;
 

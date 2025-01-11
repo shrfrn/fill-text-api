@@ -23,12 +23,12 @@ describe('Phone Number Generator Tests', () => {
   describe('Area Code Formats', () => {
     test('generates phone with default area code', () => {
       const result = generateData({ phone: '{phone|area}' });
-      expect(result[0].phone).toMatch(/^\(\d{3}\)-\d{7}$/);
+      expect(result[0].phone).toMatch(/^\((\d{2})\)-\d{8}$|^\((\d{3})\)-\d{7}$/);
     });
 
     test('generates phone with 2-digit area code', () => {
       const result = generateData({ phone: '{phone|area2}' });
-      expect(result[0].phone).toMatch(/^\(\d{2}\)-\d{7}$/);
+      expect(result[0].phone).toMatch(/^\(\d{2}\)-\d{8}$/);
     });
 
     test('generates phone with 3-digit area code', () => {
@@ -40,12 +40,12 @@ describe('Phone Number Generator Tests', () => {
   describe('Combined Formats', () => {
     test('generates phone with country and area code', () => {
       const result = generateData({ phone: '{phone|country,area}' });
-      expect(result[0].phone).toMatch(/^\+\d{1,3}-\(\d{2,3}\)-\d{7}$/);
+      expect(result[0].phone).toMatch(/^\+\d{1,3}-\(\d{2}\)-\d{8}$|^\+\d{1,3}-\(\d{3}\)-\d{7}$/);
     });
 
     test('generates phone with country and custom area code', () => {
       const result = generateData({ phone: '{phone|country,area2}' });
-      expect(result[0].phone).toMatch(/^\+\d{1,3}-\(\d{2}\)-\d{7}$/);
+      expect(result[0].phone).toMatch(/^\+\d{1,3}-\(\d{2}\)-\d{8}$/);
     });
 
     test('generates phone with custom length and area code', () => {
@@ -80,12 +80,36 @@ describe('Phone Number Generator Tests', () => {
 
       expect(result).toHaveLength(3);
       result.forEach(item => {
-        expect(item.phone).toMatch(/^\+\d{1,3}-\(\d{3}\)-\d{7}$/);
+        expect(item.phone).toMatch(/^\+\d{1,3}-\(\d{2}\)-\d{8}$|^\+\d{1,3}-\(\d{3}\)-\d{7}$/);
       });
 
       // Verify we're getting different numbers
       const uniqueNumbers = new Set(result.map(r => r.phone));
       expect(uniqueNumbers.size).toBeGreaterThan(1);
+    });
+  });
+
+  describe('Area Code Variations', () => {
+    test('generates random length area codes when using generic area option', () => {
+      // Generate multiple numbers to ensure we get both lengths
+      const results = generateData({
+        rows: '30',  // Generate enough samples to likely get both lengths
+        phone: '{phone|area}'
+      });
+
+      // Extract area code lengths
+      const areaLengths = results.map(r => {
+        const match = r.phone.match(/^\((\d{2,3})\)-/);
+        return match[1].length;
+      });
+
+      // Convert to Set to get unique lengths
+      const uniqueLengths = new Set(areaLengths);
+      
+      // We should see both lengths of 2 and 3
+      expect(uniqueLengths.size).toBe(2);
+      expect(uniqueLengths.has(2)).toBe(true);
+      expect(uniqueLengths.has(3)).toBe(true);
     });
   });
 }); 

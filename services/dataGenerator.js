@@ -188,7 +188,9 @@ const generateValue = (value, index, previousValues) => {
 
         // Numbers and IDs
         case 'index':
-            return index + 1
+            // Parse the starting index from format, default to 0
+            const startIndex = format ? parseInt(format) || 0 : 0;
+            return index + startIndex;
         case 'numberRange':
             if (format) {
                 const [min, max] = format.split(',').map(Number)

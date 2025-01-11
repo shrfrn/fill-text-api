@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --detectOpenHandles",
     "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "keywords": [],
@@ -22,7 +22,7 @@
     "@babel/preset-env": "^7.x",
     "babel-jest": "^29.x",
     "jest": "^29.x",
-    "jest-html-reporter": "^3.x",
+    "jest-html-reporters": "^3.x",
     "jest-watch-typeahead": "^2.x",
     "supertest": "^6.x"
   }

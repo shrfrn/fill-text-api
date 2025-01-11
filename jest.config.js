@@ -3,14 +3,24 @@ export default {
   testEnvironment: 'node',
   reporters: [
     'default',
-    ['jest-html-reporter', {
-      pageTitle: 'Test Report',
-      outputPath: './test-reports/test-report.html',
+    ['jest-html-reporters', {
+      publicPath: './test-reports',
+      filename: 'test-report.html',
+      openReport: true,
       includeFailureMsg: true,
       includeConsoleLog: true
     }]
   ],
   transform: {
     '^.+\\.js$': 'babel-jest'
-  }
+  },
+  watchPathIgnorePatterns: ['node_modules'],
+  testMatch: ['**/test/**/*.test.js'],
+  watchIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/dist/',
+    '<rootDir>/build/',
+    '<rootDir>/coverage/',
+    '<rootDir>/test-reports/'
+  ]
 }; 

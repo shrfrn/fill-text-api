@@ -20,7 +20,7 @@ app.use(express.json())
 app.get('/', async (req, res) => {
     try {
         const [markdown, template] = await Promise.all([
-            fs.readFile(path.join(__dirname, 'API_DOCUMENTATION.md'), 'utf-8'),
+            fs.readFile(path.join(__dirname, 'readme.md'), 'utf-8'),
             fs.readFile(path.join(__dirname, 'views/template.html'), 'utf-8')
         ])
         

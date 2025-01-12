@@ -13,7 +13,7 @@ export const generateData = (params) => {
 
             // Handle array values like [HR,IT,Sales,Marketing]
             if (value.startsWith('[') && value.endsWith(']')) {
-                const options = value.slice(1, -1).split(',')
+                const options = value.slice(1, -1).split(/\s*,\s*|\s+/)
                 item[key] = options[Math.floor(Math.random() * options.length)]
                 return
             }

@@ -37,16 +37,18 @@ export const generateData = (params) => {
 }
 
 const generateValue = (value, index, previousValues) => {
-    // Handle static values
-    if (!value.startsWith('{')) return value
 
     const { type, format } = parseType(value)
 
     // Handle {this.*} references
-    if (type.startsWith('this.')) {
-        const refKey = type.substring(5)
+    if (type.startsWith('{this.')) {
+        const refKey = type.slice(6, -1)
+        console.log(refKey, '|', previousValues)
         return previousValues[refKey] || ''
     }
+
+    // Handle static values
+    if (!value.startsWith('{')) return value
 
     // Route to specialized generators
     if (isPersonData(type)) return generatePersonData(type, format)

@@ -52,19 +52,15 @@ const generateValue = (value, index, previousValues) => {
 
     // Route to specialized generators
     if (isPersonData(type)) return generatePersonData(type, format)
-    if (type === 'phone') return generatePhoneData(format)
     if (isLocationData(type)) return generateLocationData(type, format)
     if (isBusinessData(type)) return generateBusinessData(type, format)
     if (isPrimitiveType(type)) return generatePrimitiveData(type, format, index)
+        
+    if (type === 'phone') return generatePhoneData(format)
     if (type === 'date') return generateDateData(format)
     if (type === 'lorem') return generateLoremData(format)
 
     return value
-}
-
-const isPersonData = (type) => {
-    return ['firstName', 'lastName', 'middleName', 'title', 'fullName', 
-            'username', 'password', 'email'].includes(type)
 }
 
 const generatePersonData = (type, format) => {
@@ -167,8 +163,21 @@ const generatePhoneData = (format) => {
     return result;
 }
 
+const isPersonData = (type) => {
+    return ['firstName', 'lastName', 'middleName', 'title', 'fullName', 
+            'username', 'password', 'email'].includes(type)
+}
+
 const isLocationData = (type) => {
     return ['streetAddress', 'city', 'zip', 'country', 'usState', 'addressObject'].includes(type)
+}
+
+const isBusinessData = (type) => {
+    return ['business', 'ccType', 'ccNumber'].includes(type)
+}
+
+const isPrimitiveType = (type) => {
+    return ['index', 'numberRange', 'numberLength', 'string'].includes(type)
 }
 
 const generateLocationData = (type, format) => {
@@ -201,10 +210,6 @@ const generateLocationData = (type, format) => {
     }
 }
 
-const isBusinessData = (type) => {
-    return ['business', 'ccType', 'ccNumber'].includes(type)
-}
-
 const generateBusinessData = (type, format) => {
     switch (type) {
         case 'business':
@@ -218,10 +223,6 @@ const generateBusinessData = (type, format) => {
         default:
             return ''
     }
-}
-
-const isPrimitiveType = (type) => {
-    return ['index', 'numberRange', 'numberLength', 'string'].includes(type)
 }
 
 const generatePrimitiveData = (type, format, index) => {

@@ -1,3 +1,9 @@
+# Issues
+
+[] The date generator is not working as expected when supplying partial range with formatting
+
+# Features
+
 [] Add a test for the date generator to test for all formats with & without full or partial range
 [] Add support for more string options - uppercase, lowercase, mixed case, with or without digits
 [] Add support for more number options - positive, negative, decimal, integer, range

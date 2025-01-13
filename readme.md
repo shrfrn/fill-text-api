@@ -80,7 +80,6 @@ This API allows you to generate mock data based on various parameters.
 | {date\|format} | Custom formatted date | `date={date\|MM/dd/yyyy}` | `"03/21/2024"` | [Try it!](/api?date={date\|MM/dd/yyyy}) |
 | {date\|min,max} | Date within range | `dob={date\|01-01-1980,31-12-1999}` | `"1992-06-15T..."` | [Try it!](/api?dob={date\|01-01-1980,31-12-1999}) |
 | {date\|min,max\|format} | Formatted date in range | `dob={date\|01-01-1980,31-12-1999\|MM/dd/yyyy}` | `"06/15/1992"` | [Try it!](/api?dob={date\|01-01-1980,31-12-1999\|MM/dd/yyyy}) |
-| {string\|n} | Random string of length n | `str={string\|10}` | `"aB3$kP9#mN"` | [Try it!](/api?str={string\|10}) |
 
 ##### Date Range Format
 - Date range uses `dd-mm-yyyy` format for min and max dates
@@ -115,6 +114,7 @@ Common format examples:
 #### Text Generation
 | Type | Description | Example | Output | Demo |
 |------|-------------|---------|---------|------|
+| {string\|n} | Random string of length n (default 5) | `str={string\|10}` | `"aB3$kP9#mN"` | [Try it!](/api?str={string\|10}) |
 | {lorem} | Generate 3 random words | `text={lorem}` | `"lorem ipsum dolor"` | [Try it!](/api?text={lorem}) |
 | {lorem\|n} | Generate n random words | `text={lorem\|5}` | `"lorem ipsum dolor sit amet"` | [Try it!](/api?text={lorem\|5}) |
 | {lorem\|min,max} | Generate random number of words | `text={lorem\|3,6}` | `"lorem ipsum dolor sit"` | [Try it!](/api?text={lorem\|3,6}) |

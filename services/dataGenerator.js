@@ -284,7 +284,7 @@ const generateDateData = (format) => {
             // Apply replacements in order
             let result = format
             for (const [pattern, replacement] of replacements) {
-                result = result.replace(new RegExp(pattern, 'g'), replacement)
+                result = result.replace(new RegExp(pattern, 'gi'), replacement)
             }
             
             return result

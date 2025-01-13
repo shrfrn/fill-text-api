@@ -64,12 +64,12 @@ const generateValue = (value, index, previousValues) => {
 }
 
 const generatePersonData = (type, format) => {
-    switch (type) {
-        case 'firstName':
+    switch (type.toLowerCase()) {
+        case 'firstname':
             return faker.person.firstName()
-        case 'lastName':
+        case 'lastname':
             return faker.person.lastName()
-        case 'middleName':
+        case 'middlename':
             return format === 'initial' 
                 ? faker.person.firstName().charAt(0) + '.'
                 : faker.person.firstName()
@@ -77,7 +77,7 @@ const generatePersonData = (type, format) => {
             return format === 'abbr'
                 ? faker.helpers.arrayElement(['Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Prof.'])
                 : faker.helpers.arrayElement(['Mister', 'Misses', 'Miss', 'Doctor', 'Professor'])
-        case 'fullName':
+        case 'fullname':
             const title = format?.includes('title') 
                 ? faker.helpers.arrayElement(['Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Prof.']) + ' '
                 : ''
@@ -164,25 +164,24 @@ const generatePhoneData = (format) => {
 }
 
 const isPersonData = (type) => {
-    return ['firstName', 'lastName', 'middleName', 'title', 'fullName', 
-            'username', 'password', 'email'].includes(type)
+    return /^(firstName|lastName|middleName|title|fullName|username|password|email)$/i.test(type);
 }
 
 const isLocationData = (type) => {
-    return ['streetAddress', 'city', 'zip', 'country', 'usState', 'addressObject'].includes(type)
+    return /^(streetAddress|city|zip|country|usState|addressObject)$/i.test(type);
 }
 
 const isBusinessData = (type) => {
-    return ['business', 'ccType', 'ccNumber'].includes(type)
+    return /^(business|cctype|ccnumber)$/i.test(type);
 }
 
 const isPrimitiveType = (type) => {
-    return ['index', 'numberRange', 'numberLength', 'string'].includes(type)
+    return /^(index|numberrange|numberlength|string)$/i.test(type);
 }
 
 const generateLocationData = (type, format) => {
-    switch (type) {
-        case 'streetAddress':
+    switch (type.toLowerCase()) {
+        case 'streetaddress':
             return faker.location.streetAddress()
         case 'city':
             return faker.location.city()
@@ -194,11 +193,11 @@ const generateLocationData = (type, format) => {
                 : format === 'abbr3'
                     ? faker.location.countryCode('alpha-3')
                     : faker.location.country()
-        case 'usState':
+        case 'usstate':
             return format === 'abbr'
                 ? faker.location.state({ abbreviated: true })
                 : faker.location.state()
-        case 'addressObject':
+        case 'addressobject':
             return {
                 streetAddress: faker.location.streetAddress(),
                 city: faker.location.city(),
@@ -211,14 +210,14 @@ const generateLocationData = (type, format) => {
 }
 
 const generateBusinessData = (type, format) => {
-    switch (type) {
+    switch (type.toLowerCase()) {
         case 'business':
             return faker.company.name()
-        case 'ccType':
+        case 'cctype':
             return format === 'abbr'
                 ? faker.helpers.arrayElement(['VISA', 'MC', 'AMEX', 'DISC'])
                 : faker.helpers.arrayElement(['Visa', 'Mastercard', 'American Express', 'Discover'])
-        case 'ccNumber':
+        case 'ccnumber':
             return faker.finance.creditCardNumber()
         default:
             return ''
@@ -226,17 +225,17 @@ const generateBusinessData = (type, format) => {
 }
 
 const generatePrimitiveData = (type, format, index) => {
-    switch (type) {
+    switch (type.toLowerCase()) {
         case 'index':
             const startIndex = format ? parseInt(format) || 0 : 0
             return index + startIndex
-        case 'numberRange':
+        case 'numberrange':
             if (format) {
                 const [min, max] = format.split(',').map(Number)
                 return faker.number.int({ min, max })
             }
             return faker.number.int({ min: 0, max: 1000 })
-        case 'numberLength':
+        case 'numberlength':
             return faker.string.numeric(parseInt(format) || 5)
         case 'string':
             return faker.string.alphanumeric(parseInt(format) || 5)

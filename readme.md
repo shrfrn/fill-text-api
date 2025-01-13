@@ -4,7 +4,7 @@ This API allows you to generate mock data based on various parameters.
 
 ## Query Parameters
 
-### Other Features
+### General Parameters
 
 | Parameter | Description | Default | Example | Demo |
 |-----------|-------------|---------|---------|------|
@@ -77,9 +77,9 @@ This API allows you to generate mock data based on various parameters.
 | Type | Description | Example | Output | Demo |
 |------|-------------|---------|---------|------|
 | {date} | ISO formatted date | `date={date}` | `"2024-02-15T10:30:00.000Z"` | [Try it!](/api?date={date}) |
-| {date\|format} | Custom formatted date | `date={date\|MM\/dd\/yyyy}` | `"03/21/2024"` | [Try it!](/api?date={date\|MM\/dd\/yyyy}) |
+| {date\|format} | Custom formatted date | `date={date\|MM/dd/yyyy}` | `"03/21/2024"` | [Try it!](/api?date={date\|MM/dd/yyyy}) |
 | {date\|min,max} | Date within range | `dob={date\|01-01-1980,31-12-1999}` | `"1992-06-15T..."` | [Try it!](/api?dob={date\|01-01-1980,31-12-1999}) |
-| {date\|min,max\|format} | Formatted date in range | `dob={date\|01-01-1980,31-12-1999\|MM\/dd\/yyyy}` | `"06/15/1992"` | [Try it!](/api?dob={date\|01-01-1980,31-12-1999\|MM\/dd\/yyyy}) |
+| {date\|min,max\|format} | Formatted date in range | `dob={date\|01-01-1980,31-12-1999\|MM/dd/yyyy}` | `"06/15/1992"` | [Try it!](/api?dob={date\|01-01-1980,31-12-1999\|MM/dd/yyyy}) |
 | {string\|n} | Random string of length n | `str={string\|10}` | `"aB3$kP9#mN"` | [Try it!](/api?str={string\|10}) |
 
 ##### Date Range Format

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app",
+    "dev": "nodemon app --ignore test-reports",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --detectOpenHandles",
     "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"

@@ -1,0 +1,5 @@
+[] Add a test for the date generator to test for all formats with & without full or partial range
+[] Add support for more string options - uppercase, lowercase, mixed case, with or without digits
+[] Add support for more number options - positive, negative, decimal, integer, range
+[] Add support for more date options - past, future
+[] Add support for more boolean options - true, false

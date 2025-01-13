@@ -3,6 +3,7 @@
 This API allows you to generate mock data based on various parameters.
 
 ## Query Parameters
+All parameters are case insensitive.
 
 ### General Parameters
 
@@ -125,6 +126,6 @@ Common format examples:
 |-----------------------|---------|------|
 |  Use [square brackets] to randomly select from a list of options: | `dept=[HR,IT,Sales]` | [Try it!](/api?dept=[HR,IT,Sales]) |
 |  Use ~ to concatinate options: | `id={firstName}~{index}` | [Try it!](/api?id={firstName}~{index}) |
-|  Use `this.` to refer to the previous value: | `name={firstName}&id={this.firstName}~{index}` | [Try it!](/api?name={firstName}&id={this.name}~{index}) |
+|  Use `this.` to refer to previous values: | `name={firstName}&id={this.firstName}~{index}` | [Try it!](/api?name={firstName}&id={this.name}~{index}) |
 
 

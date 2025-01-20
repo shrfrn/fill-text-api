@@ -66,19 +66,21 @@ All parameters are case insensitive.
 | {ccType\|abbr} | Credit card provider abbreviation | `cardType={ccType\|abbr}` | `"VISA"` | [Try it!](/api?cardType={ccType\|abbr}) |
 | {ccNumber} | Credit card number | `cardNumber={ccNumber}` | `"4532123456789012"` | [Try it!](/api?cardNumber={ccNumber}) |
 
-#### Numbers and IDs
+#### Numbers and Booleans
 | Type | Description | Example | Output | Demo |
 |------|-------------|---------|---------|------|
 | {index} | Sequential number (0-based) | `id={index}` | `0` | [Try it!](/api?id={index}) |
 | {index\|n} | Sequential number starting from n | `id={index\|1}` | `1` | [Try it!](/api?id={index\|1}) |
 | {numberRange\|min,max} | Random number in range | `amount={numberRange\|1,100}` | `42` | [Try it!](/api?amount={numberRange\|1,100}) |
 | {numberLength\|n} | Random number with n digits | `code={numberLength\|6}` | `"123456"` | [Try it!](/api?code={numberLength\|6}) |
+| {boolean} | Random Boolean | `isAdmin={boolean}` | `true` or `false` | [Try it!](/api?isAdmin={boolean}) |
+| {boolean\|n} | Boolean with probabilty n (0 - 1) of being true | `isAdmin={boolean\|.7}` | `true` 70% of the time | [Try it!](/api?isAdmin={boolean\|.7}) |
 
-#### Dates and Strings
+#### Dates
 | Type | Description | Example | Output | Demo |
 |------|-------------|---------|---------|------|
-| {date} | ISO formatted date | `date={date}` | `"2024-02-15T10:30:00.000Z"` | [Try it!](/api?date={date}) |
-| {date\|format} | Custom formatted date | `date={date\|MM/dd/yyyy}` | `"03/21/2024"` | [Try it!](/api?date={date\|MM/dd/yyyy}) |
+| {date} | ISO formatted date | `dob={date}` | `"2024-02-15T10:30:00.000Z"` | [Try it!](/api?dob={date}) |
+| {date\|format} | Custom formatted date | `dob={date\|MM/dd/yyyy}` | `"03/21/2024"` | [Try it!](/api?dob={date\|MM/dd/yyyy}) |
 | {date\|min,max} | Date within range | `dob={date\|01-01-1980,31-12-1999}` | `"1992-06-15T..."` | [Try it!](/api?dob={date\|01-01-1980,31-12-1999}) |
 | {date\|min,max\|format} | Formatted date in range | `dob={date\|01-01-1980,31-12-1999\|MM/dd/yyyy}` | `"06/15/1992"` | [Try it!](/api?dob={date\|01-01-1980,31-12-1999\|MM/dd/yyyy}) |
 

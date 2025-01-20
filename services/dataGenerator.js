@@ -236,7 +236,7 @@ const generatePrimitiveData = (type, format, index) => {
             }
             return faker.number.int({ min: 0, max: 1000 })
         case 'numberlength':
-            return faker.string.numeric(parseInt(format) || 5)
+            return faker.number.int(parseInt(format) || 5)
         case 'string':
             return faker.string.alphanumeric(parseInt(format) || 5)
         case 'boolean':

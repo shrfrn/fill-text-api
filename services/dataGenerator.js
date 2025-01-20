@@ -176,7 +176,7 @@ const isBusinessData = (type) => {
 }
 
 const isPrimitiveType = (type) => {
-    return /^(index|numberrange|numberlength|string|boolean)$/i.test(type);
+    return /^(index|number|string|boolean)$/i.test(type);
 }
 
 const generateLocationData = (type, format) => {
@@ -229,16 +229,15 @@ const generatePrimitiveData = (type, format, index) => {
         case 'index':
             const startIndex = format ? parseInt(format) || 0 : 0
             return index + startIndex
-        case 'numberrange':
+        case 'number':
             if (format) {
                 const [min, max] = format.split(',').map(Number)
                 return faker.number.int({ min, max })
             }
-            return faker.number.int({ min: 0, max: 1000 })
-        case 'numberlength':
-            return faker.number.int(parseInt(format) || 5)
+            return faker.number.int({ min: 0, max: 100 })
         case 'string':
             return faker.string.alphanumeric(parseInt(format) || 5)
+        case 'bool':
         case 'boolean':
             return faker.datatype.boolean(parseFloat(format) || .5)
         default:

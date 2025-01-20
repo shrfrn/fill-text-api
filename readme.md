@@ -21,8 +21,8 @@ delay value is returned in the response as `delay`
 |------|-------------|---------|---------|------|
 | {index} | Sequential number (0-based) | `id={index}` | `0` | [Try it!](/api?id={index}) |
 | {index\|n} | Sequential number starting from n | `id={index\|1}` | `1` | [Try it!](/api?id={index\|1}) |
-| {numberRange\|min,max} | Random number in range | `amount={numberRange\|1,100}` | `42` | [Try it!](/api?amount={numberRange\|1,100}) |
-| {numberLength\|n} | Random number with n digits | `code={numberLength\|6}` | `"123456"` | [Try it!](/api?code={numberLength\|6}) |
+| {number} | Random number (0 - 100) | `amount={number}` | `42` | [Try it!](/api?amount={number}) |
+| {number\|min,max} | Random number in range | `amount={number\|10,20}` | `13` | [Try it!](/api?amount={number\|10,20}) |
 | {boolean} | Random Boolean | `isAdmin={boolean}` | `true` or `false` | [Try it!](/api?isAdmin={boolean}) |
 | {boolean\|n} | Boolean with probabilty n (0 - 1) of being true | `isAdmin={boolean\|.7}` | `true` 70% of the time | [Try it!](/api?isAdmin={boolean\|.7}) |
 

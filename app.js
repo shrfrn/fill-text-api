@@ -33,9 +33,12 @@ app.get('/', async (req, res) => {
 })
 
 // API endpoint that supports query parameters for data generation
-app.get('/api', (req, res) => {
+app.get('/api', async (req, res) => {
     try {
         const params = { ...req.query, rows: req.query.rows || 10 }
+        if (params.delay) {
+            await new Promise(resolve => setTimeout(resolve, params.delay * 1000))
+        }
         const data = generateData(params)
         res.json(data)
     } catch (error) {

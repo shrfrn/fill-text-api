@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 import { marked } from 'marked'
 
 import { generateData } from './services/dataGenerator.js'
+import * as logger from './services/logger.js'
 
 const app = express()
 const port = 3000
@@ -27,14 +28,13 @@ app.get('/', async (req, res) => {
         const html = template.replace('{{content}}', marked(markdown))
         res.send(html)
     } catch (error) {
-        console.error('Documentation error:', error)
+        await logger.error('Documentation error', { error: error.message, stack: error.stack })
         res.status(500).send('Error loading documentation')
     }
 })
 
 // API endpoint that supports query parameters for data generation
 app.get('/api', async (req, res) => {
-    
     try {
         const params = { ...req.query, rows: req.query.rows || 10 }
         
@@ -56,8 +56,14 @@ app.get('/api', async (req, res) => {
             res.json(data)
         }
         
+        await logger.info('Data generated successfully', { params })
+        
     } catch (error) {
-        console.error('Data generation error:', error.message, error.stack)
+        await logger.error('Data generation error', { 
+            error: error.message, 
+            stack: error.stack,
+            params: req.query 
+        })
         res.status(500).json({ 
             error: 'Failed to generate data',
             message: error.message,
@@ -67,5 +73,6 @@ app.get('/api', async (req, res) => {
 })
 
 // Start the server
-app.listen(port, () => 
-    console.log(`Server is running on http://localhost:${port}`)) 
+app.listen(port, () => {
+    logger.info(`Server started`, { port })
+}) 

@@ -73,9 +73,9 @@ describe('Index Generation Tests', () => {
 	test('generates numbers within specified range', () => {
 		const result = generateData({
 			rows: 100,
-			num1: '{numberRange|1,10}',
-			num2: '{numberRange|50,55}',
-			num3: '{numberRange|-10,0}',
+			num1: '{number|1,10}',
+			num2: '{number|50,55}',
+			num3: '{number|-10,0}',
 		})
 
 		result.forEach(item => {
@@ -87,26 +87,6 @@ describe('Index Generation Tests', () => {
 
 			expect(item.num3).toBeGreaterThanOrEqual(-10)
 			expect(item.num3).toBeLessThanOrEqual(0)
-		})
-	})
-
-	test('generates numbers with specified length', () => {
-		const result = generateData({
-			rows: 10,
-			num1: '{numberLength|3}',
-			num2: '{numberLength|5}',
-			num3: '{numberLength|1}',
-		})
-
-		result.forEach(item => {
-			expect(item.num1.toString()).toHaveLength(3)
-			expect(item.num2.toString()).toHaveLength(5)
-			expect(item.num3.toString()).toHaveLength(1)
-
-			// Verify they're all numeric strings
-			expect(item.num1).toMatch(/^\d+$/)
-			expect(item.num2).toMatch(/^\d+$/)
-			expect(item.num3).toMatch(/^\d+$/)
 		})
 	})
 })

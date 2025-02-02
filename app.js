@@ -34,13 +34,28 @@ app.get('/', async (req, res) => {
 
 // API endpoint that supports query parameters for data generation
 app.get('/api', async (req, res) => {
+    
     try {
         const params = { ...req.query, rows: req.query.rows || 10 }
+        
+        const pretty = params.pretty ? true : false
+        delete params.pretty
+
         if (params.delay) {
-            await new Promise(resolve => setTimeout(resolve, params.delay * 1000))
+            await new Promise(resolve => setTimeout(resolve, +params.delay * 1000))
+            delete params.delay
         }
+        
         const data = generateData(params)
-        res.json(data)
+        
+        // Set response based on pretty parameter
+        if (pretty) {
+            res.set('Content-Type', 'application/json')
+            res.send(JSON.stringify(data, null, 2))
+        } else {
+            res.json(data)
+        }
+        
     } catch (error) {
         console.error('Data generation error:', error.message, error.stack)
         res.status(500).json({ 

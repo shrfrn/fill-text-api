@@ -12,7 +12,6 @@ All parameters are case insensitive.
 | rows | Number of records to generate (1-1000) | 10 | `rows=10` | [Try it!](/api?rows=10) |
 | delay | Number of seconds to delay response | - | `delay=5` | [Try it!](/api?delay=5&name={firstName}) |
 
-delay value is returned in the response as `delay`
 
 ### Data Types
 
@@ -67,10 +66,10 @@ delay value is returned in the response as `delay`
 | s | Single-digit seconds (0-59) | "9" |
 
 Common format examples:
-- `date={date\|M/d/yyyy}` → "3/9/2024"
-- `date={date\|dow, Mon d, yyyy}` → "Tue, Mar 9, 2024"
-- `date={date\|DOW, Month d, yyyy}` → "Tuesday, March 9, 2024"
-- `date={date\|yyyy-MM-dd HH:mm:ss}` → "2024-03-09 14:05:09"
+- `date={date|M/d/yyyy}` → "3/9/2024"
+- `date={date|dow, Mon d, yyyy}` → "Tue, Mar 9, 2024"
+- `date={date|DOW, Month d, yyyy}` → "Tuesday, March 9, 2024"
+- `date={date|yyyy-MM-dd HH:mm:ss}` → "2024-03-09 14:05:09"
 
 #### Personal Information
 | Type | Description | Example | Output | Demo |
@@ -131,6 +130,6 @@ Common format examples:
 |-----------------------|---------|------|
 |  Use [square brackets] to randomly select from a list of options: | `dept=[HR,IT,Sales]` | [Try it!](/api?dept=[HR,IT,Sales]) |
 |  Use ~ to concatinate options: | `id={firstName}~{index}` | [Try it!](/api?id={firstName}~{index}) |
-|  Use `this.` to refer to previous values: | `name={firstName}&id={this.firstName}~{index}` | [Try it!](/api?name={firstName}&id={this.name}~{index}) |
+|  Use `this.` to refer to previous values: | `name={firstName}&id={this.name}~{index}` | [Try it!](/api?name={firstName}&id={this.name}~{index}) |
 
 

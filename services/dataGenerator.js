@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 
 export const generateData = (params) => {
-    const rows = parseInt(params.rows) || 1
+    const rows = parseInt(params.rows) || 10
     const data = []
     const generatedValues = {} // Store values for {this.*} references
 
@@ -32,7 +32,7 @@ export const generateData = (params) => {
         
         data.push(item)
     }
-    
+
     return data
 }
 
@@ -43,7 +43,6 @@ const generateValue = (value, index, previousValues) => {
     // Handle {this.*} references
     if (type.startsWith('{this.')) {
         const refKey = type.slice(6, -1)
-        console.log(refKey, '|', previousValues)
         return previousValues[refKey] || ''
     }
 

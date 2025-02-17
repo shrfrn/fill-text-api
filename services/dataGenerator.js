@@ -175,7 +175,7 @@ const isBusinessData = (type) => {
 }
 
 const isPrimitiveType = (type) => {
-    return /^(index|number|string|boolean)$/i.test(type);
+    return /^(index|number|string|boolean|bool)$/i.test(type);
 }
 
 const generateLocationData = (type, format) => {

@@ -1,6 +1,6 @@
-# Mock Data Generation API Documentation (RIP FillText.com)
+# Mr. JSON - Mock Data Generation API (R.I.P FillText.com)
 
-This API allows you to generate mock data based on various parameters.
+Welcome to Mr. JSON, a free mock JSON data generation API for developers and testing purposes.
 
 ## Query Parameters
 All parameters are case insensitive.

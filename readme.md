@@ -39,12 +39,15 @@ All parameters are case insensitive.
 | {date} | ISO formatted date | `dob={date}` | `"2024-02-15T10:30:00.000Z"` | [Try it!](/api?dob={date}) |
 | {date\|format} | Custom formatted date | `dob={date\|MM/dd/yyyy}` | `"03/21/2024"` | [Try it!](/api?dob={date\|MM/dd/yyyy}) |
 | {date\|min,max} | Date within range | `dob={date\|01-01-1980,31-12-1999}` | `"1992-06-15T..."` | [Try it!](/api?dob={date\|01-01-1980,31-12-1999}) |
+| {date\|yyyy,yyyy} | Date within year range | `dob={date\|2020,2022}` | `"2021-08-23T..."` | [Try it!](/api?dob={date\|2020,2022}) |
 | {date\|min,max\|format} | Formatted date in range | `dob={date\|01-01-1980,31-12-1999\|MM/dd/yyyy}` | `"06/15/1992"` | [Try it!](/api?dob={date\|01-01-1980,31-12-1999\|MM/dd/yyyy}) |
 
 ##### Date Range Format
 - Date range uses `dd-mm-yyyy` format for min and max dates
+- Alternatively, you can specify just the year using `yyyy` format: `date={date|2020,2022}`
 - Either min or max can be omitted: `date={date|,31-12-1999}` or `date={date|01-01-1980,}`
 - Can be combined with date formatting: `date={date|01-01-1980,31-12-1999|yyyy-MM-dd}`
+- Mixed formats are supported: `date={date|2020,31-12-2022}` or `date={date|01-01-2020,2022}`
 
 ##### Date Format Patterns
 | Pattern | Description | Example Output |

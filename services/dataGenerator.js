@@ -302,6 +302,11 @@ const generateDateData = (format) => {
             
             const parseDate = (dateStr) => {
                 if (!dateStr) return undefined
+                // Check if it's a year-only format
+                if (/^\d{4}$/.test(dateStr)) {
+                    return new Date(parseInt(dateStr), 0, 1) // January 1st of the given year
+                }
+                // Otherwise parse as dd-mm-yyyy
                 const [dd, mm, yyyy] = dateStr.split('-').map(Number)
                 return new Date(yyyy, mm - 1, dd)
             }

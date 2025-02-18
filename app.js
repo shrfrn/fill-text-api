@@ -17,6 +17,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // Middleware to parse JSON bodies
 app.use(express.json())
 
+// Serve static files from assets directory
+app.use('/assets', express.static(path.join(__dirname, 'assets')))
+
 // Serve documentation at root
 app.get('/', async (req, res) => {
     try {

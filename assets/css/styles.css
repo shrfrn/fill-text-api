@@ -1,13 +1,15 @@
 .logo-container {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 2rem;
+    right: 2rem;
     z-index: 100;
-    width: 300px;
-    height: auto;
+    width: 270px;
+    height: 50vh;
 }
 
 .logo-container img {
+    position: sticky;
+    inset: 20px 20px auto auto;
     width: 100%;
     height: auto;
     border-radius: 50%;

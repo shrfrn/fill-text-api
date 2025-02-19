@@ -3,14 +3,34 @@
     top: 2rem;
     right: 2rem;
     z-index: 100;
-    width: 270px;
+    width: 20vw;
     height: 50vh;
 }
 
 .logo-container img {
     position: sticky;
-    inset: 20px 20px auto auto;
+    inset: 100px 20px auto auto;
     width: 100%;
     height: auto;
     border-radius: 50%;
 } 
+
+.markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 45px;
+}
+
+@media (width < 992px) {
+    .logo-container {
+        display: none;
+    }
+}
+
+@media (width < 767px) {
+    .markdown-body {
+        padding: 15px;
+    }
+}

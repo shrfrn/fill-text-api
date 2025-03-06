@@ -1,6 +1,12 @@
 # Mr. JSON - Mock Data Generation API (R.I.P FillText.com)
 
-Welcome to Mr. JSON, a free mock JSON data generation API for developers and testing purposes.
+Welcome to **Mr. JSON**, a free mock JSON data generation API for developers and testing purposes. Define the output schema you need with a simple and flexible syntax.
+Here are some examples:
+| Schema | Demo Link |
+| --- | --- |
+| id, firstname, score | https://mrjson.com/api?id={string\|10}&name={firstName}&score={number} |
+| email, fullname, dob | https://mrjson.com/api?email={email}&fullName={fullName}&dob={date\|01-01-1980,31-12-1999\|MM/dd/yyyy} |
+| index, address, phone | https://mrjson.com/api?id={index\|1}&address={addressObject}&tel={phone\|area3} |
 
 ## Query Parameters
 All parameters are case insensitive.

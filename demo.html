@@ -9,9 +9,9 @@
     <body>
         <h1>Test Page</h1>
         <button onclick="testApi()">Test API</button>
-        <div id="result"></div>
         <script>
             function testApi() {
+                // const res = fetch('https://mrjson.com/api?id={string|10}&name={firstName}&score={number}')
                 const res = fetch('http://127.0.0.1:3000/api?id={string|10}&name={firstName}&score={number}')
                     .then(res => res.json())
                     .then(data => console.log(data))

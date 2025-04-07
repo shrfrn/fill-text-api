@@ -12,30 +12,9 @@ import * as logger from './services/logger.js'
 const app = express()
 const port = 3000
 
-// CORS configuration
+// CORS configuration 
 const corsOptions = {
-    origin: (origin, callback) => {
-
-        // Allow requests with no origin (like mobile apps, curl, postman)
-        if (!origin) {
-            callback(null, true)
-            return
-        }
-        
-        try {
-            const url = new URL(origin)
-            const port = parseInt(url.port)
-            
-            // Allow requests from ports 5500 to 5599
-            if (port >= 5500 && port <= 5599) {
-                callback(null, true)
-            } else {
-                callback(new Error('Not allowed by CORS'))
-            }
-        } catch (error) {
-            callback(new Error('Invalid origin'))
-        }
-    },
+    origin: '*', // Allow all origins
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }
